@@ -8,7 +8,9 @@
 // root.appendChild(heading2);
 
 // React
-const heading1 = React.createElement("h1", {}, "Hello World-React-1");
+import React from "react";
+import ReactDOM from "react-dom/client";
+const heading1 = React.createElement("h1", {}, "Hello All World-React-1");
 const heading2 = React.createElement("h1", {}, "Hello World-React-2");
 const container = React.createElement("div", {}, [heading1, heading2]);
 const root = ReactDOM.createRoot(document.getElementById("root"));
