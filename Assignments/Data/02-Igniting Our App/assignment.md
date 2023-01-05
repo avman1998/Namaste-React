@@ -48,3 +48,31 @@ Its functions are:
 - Cleaning our code
 - Caching while development
   - It is done with the help of .parcel-cache directory to speed up build.
+
+# - What is `.gitignore`? What should we add and not add into it?
+
+- .gitignore is a text file, which tells git about the files and folder to be ignored in project.
+  ## What should we add?
+- Something which is reproducible at server. ex. Node modules, parcel-cache, dist folder etc.
+
+  ## What should not be added?
+
+- Something which is not reproducible at server. ex. package.json, package-lock.json etc.
+
+# - What is the difference between `package.json` and `package-lock.json`
+
+- package.json contains meta data of the project and function dependencies required by the project.
+- package-lock,json is created for locking dependecy with installed version. It will install the latest version of package and save it to the package.json.
+
+# - What is `node_modules` ? Is it a good idea to push that on git?
+
+- It is a directory which contains every dependencies installed in the project.
+- No, node modules folder should not push to the git. Because it is very big in size and can be reproducible at the server.
+
+# - What is the `dist` folder?
+
+- Dist folder contains minimized version of source code. That code is used in production web applications.
+
+# - What is `browserlists`
+
+- Browserlists is a tool which specifies which all version of browsers would be suppported by our app.
