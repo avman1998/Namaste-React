@@ -1,4 +1,7 @@
+import React, { useState } from "react";
+
 export const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   return (
     <div className="header">
       <Title />
@@ -8,6 +11,13 @@ export const Header = () => {
         <li className="nav-item">Contact</li>
         <li className="nav-item">Cart</li>
       </ul>
+      <button
+        onClick={() => {
+          setIsLoggedIn((prev) => !prev);
+        }}
+      >
+        {isLoggedIn ? "Logout" : "LogIn"}
+      </button>
     </div>
   );
 };
