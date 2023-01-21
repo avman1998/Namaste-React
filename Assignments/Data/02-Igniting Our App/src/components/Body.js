@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import { restaurantList } from "../config";
-
+import { Link } from "react-router-dom";
 import { RestaurantCard } from "./Restaurantcard";
 
 export function Body() {
@@ -71,7 +71,13 @@ export function Body() {
         ) : (
           filteredRestaurants?.map((restaurant) => {
             return (
-              <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+              <Link
+                to={`restaurant/${restaurant.data.id}`}
+                key={restaurant.data.id}
+              >
+                {" "}
+                <RestaurantCard {...restaurant.data} key={restaurant.data.id} />
+              </Link>
             );
           })
         )}
