@@ -3,13 +3,20 @@ import Loader from "./Loader";
 import { restaurantList } from "../config";
 import { Link } from "react-router-dom";
 import { RestaurantCard } from "./Restaurantcard";
-
+import { filterRestaurants } from "../utils/helper";
+import useOnline from "../utils/useOnline";
+// const isOnline = useOnline();
+// if (!isOnline) {
+//   {
+//     return <h1>You are offline.</h1>;
+//   }
+// }
 export function Body() {
   // Restaurants Display Functionality
+  const [searchText, setSearchText] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   // Search functionality
-  const [searchText, setSearchText] = useState("");
 
   // Calling Swiggy API through UseEffect
   useEffect(() => {
@@ -17,37 +24,31 @@ export function Body() {
   }, []);
   //fetching Data
   async function getData() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.7195687&lng=75.8577258&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-    setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    try {
+      const data = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=22.7195687&lng=75.8577258&page_type=DESKTOP_WEB_LISTING"
+      );
+      const json = await data.json();
+      setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+      setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    } catch (e) {
+      console.log(e);
+    }
     //data.cards[2].data.data.cards
   }
-  //Early return
+
+  // Early return
   // if (!allRestaurants.length) return null;
-  //Filter Function
-  function filterRestaurants(search, allRestaurants) {
-    const newArr = allRestaurants.filter((restaurant) => {
-      if (
-        restaurant?.data?.name.toLowerCase()?.includes(search.toLowerCase())
-      ) {
-        return restaurant;
-      }
-    });
-    console.log("Filter Called up");
-    return newArr;
-  }
+  // Filter Function
 
   return !allRestaurants.length ? (
     <Loader />
   ) : (
-    <div className="body-res-list">
-      <div className="search">
+    <div className="body-res-list flex flex-col items-center justify-center">
+      <div className="search my-[20px] flex gap-[20px]">
         <input
           type="text"
-          placeholder="Enter search"
+          placeholder="Enter restaurant name"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
@@ -61,11 +62,12 @@ export function Body() {
             setFilteredRestaurants(data);
             console.log(allRestaurants);
           }}
+          className="py-[5px] px-[10px] rounded bg-red-200 text-black"
         >
-          Submit
+          Find
         </button>
       </div>
-      <div className="res-list">
+      <div className="flex flex-wrap justify-center items-baseline gap-[40px] my-[10px] mx-[17px]">
         {filteredRestaurants.length === 0 ? (
           <h2>No Restaurant Found</h2>
         ) : (

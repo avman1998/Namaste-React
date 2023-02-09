@@ -1,60 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Nunito&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
   margin: 0;
   padding: 0;
   outline: 0;
 }
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: cornflowerblue;
-  padding: 5px;
-}
-.nav-items {
-  display: flex;
-  gap: 30px;
-}
-.nav-items .nav-item {
-  list-style-type: none;
-  cursor: pointer;
-}
-.logo {
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-}
-.body-res-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.body-res-list .search {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 10px;
-}
-.res-list {
-  display: flex;
-
-  /* justify-content: space-between; */
-
-  flex-wrap: wrap;
-}
-.res-card {
-  padding: 5px;
-  cursor: pointer;
-  width: 200px;
-  border: 1px solid black;
-  margin: 10px;
-}
-.res-card p {
-  font-size: 60%;
-}
-.res-card > img + p {
-  font-weight: bold;
-}
-.res-card img {
-  width: 100%;
+body {
+  font-family: "Josefin Sans", sans-serif;
+  font-family: "Nunito", sans-serif;
 }
