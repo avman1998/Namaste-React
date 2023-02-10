@@ -22,7 +22,9 @@ export const Header = () => {
           <Link to="/contact">Contact</Link>
         </li>
         <Link to="/cart">
-          <li className="nav-item">Cart- {cartItems.length}</li>
+          <li className="nav-item">
+            <i class="fa-solid fa-cart-shopping"></i>- {cartItems.length}
+          </li>
         </Link>
         <li className="nav-item">
           <Link to="/Instamart">Instamart</Link>
