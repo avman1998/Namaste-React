@@ -9,7 +9,7 @@ export const Header = () => {
   const cartItems = useSelector((store) => store.cart.items);
   console.log(cartItems);
   return (
-    <div className="header flex md:flex-row gap-[10px] flex-col justify-between items-center bg-red-600 p-[10px] text-white">
+    <div className="header flex md:flex-row  flex-col justify-between items-center bg-red-600 p-[10px] text-white">
       <Title />
       <ul className="nav-items flex gap-[20px]">
         <li className="nav-item">
@@ -26,14 +26,14 @@ export const Header = () => {
           {/* <Link to="/Instamart">Instamart</Link> */}
         </li>
       </ul>
-      <p>{/* {user?.name} at {user.place} */}</p>
-      <button
+      {/* <p>{user?.name} at {user.place}</p> */}
+      {/* <button
         onClick={() => {
           setIsLoggedIn((prev) => !prev);
         }}
       >
         {isLoggedIn ? "Logout" : "LogIn"}
-      </button>
+      </button> */}
     </div>
   );
 };
