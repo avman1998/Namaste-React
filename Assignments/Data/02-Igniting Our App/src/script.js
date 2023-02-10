@@ -1,15 +1,16 @@
-import React, { lazy, useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import UserContext from "./utils/UserContext";
 import ReactDOM from "react-dom/client";
 import { Header } from "./components/Header";
 import { Body } from "./components/Body";
-import { Footer } from "./components/Footer";
+
 import About from "./components/About";
 import ErrorPage from "./components/ErrorPage";
 import Contact from "./components/Contact";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Cart from "./components/Cart";
 const Instamart = lazy(() => import("./components/Instamart"));
+const Checkout = lazy(() => import("./components/Checkout"));
 import Loader from "./components/Loader";
 import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
@@ -25,8 +26,6 @@ function AppLayout() {
         <Header />
 
         <Outlet />
-
-        <Footer />
       </UserContext.Provider>
     </Provider>
   );
@@ -63,6 +62,14 @@ const appRouter = createBrowserRouter([
           <supense fallback={<Loader />}>
             <Instamart />
           </supense>
+        ),
+      },
+      {
+        path: "/checkout",
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Checkout />
+          </Suspense>
         ),
       },
     ],

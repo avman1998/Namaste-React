@@ -1,3 +1,7 @@
 export default function Loader() {
-  return <h2>Loading Restaurants......</h2>;
+  return (
+    <div className="flex items-center justify-center min-h-[80vh] ">
+      <h1 className="fon-bold text-[130%] ">Loading⏳</h1>
+    </div>
+  );
 }

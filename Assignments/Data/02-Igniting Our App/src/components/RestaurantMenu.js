@@ -17,10 +17,10 @@ const RestaurantMenu = () => {
 
   return (
     <div className="flex  flex-col gap-[20px]  justify-center items-center  ">
-      <div className="flex gap-[60px] items-center justify-start p-[40px] bg-black w-[100%] text-white">
+      <div className="flex gap-[60px] items-center justify-center md:justify-start p-[40px] bg-black md:w-[100%] text-white">
         <img
           src={`${IMG_CDN_URL}/${restaurant?.cloudinaryImageId}`}
-          className="w-56"
+          className="w-56 p-[10px]"
         />
         <div className="flex flex-col gap-[10px]">
           <p className="text-[150%]">{restaurant?.name}</p>

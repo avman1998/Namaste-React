@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../utils/cartSlice";
+import { clearCart, removeItem } from "../utils/cartSlice";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const cartItems = useSelector((store) => store.cart.items);
@@ -11,25 +12,41 @@ const Cart = () => {
     dispatch(clearCart());
   }
   return (
-    <div className="flex flex-wrap flex-col  justify-evenly items-baseline p-[20px] gap-[20px]">
-      <button
-        className="bg-black text-white p-2 font-bold rounded"
-        onClick={() => handleClearCart()}
-      >
-        <i class="fa-solid fa-trash"></i> Cart
-      </button>
+    <div className="flex flex-wrap flex-col  justify-center items-center p-[20px] gap-[20px]">
+      {cartItems.length !== 0 && (
+        <button
+          className="bg-black text-white p-2 font-bold rounded"
+          onClick={() => handleClearCart()}
+        >
+          <i class="fa-solid fa-trash"></i> Cart
+        </button>
+      )}
       <div className="flex flex-wrap justify-evenly items-baseline p-[20px]">
-        {cartItems.map((item) => {
+        {cartItems.map((item, index) => {
           totalPrice = totalPrice + item?.price;
-          return <CartCard item={item} />;
+          return <CartCard item={item} index={index} />;
         })}
       </div>
-      <h1 className="font-bold ">Total Price: ₹ {totalPrice / 100}</h1>
+      {cartItems.length !== 0 && (
+        <h1 className="font-bold p-[10px] bg-green-200 rounded">
+          Total Price: ₹ {totalPrice / 100}
+        </h1>
+      )}{" "}
+      {cartItems.length !== 0 && (
+        <Link to="/checkout">
+          <button className=" mx-auto p-2 text-[120%]  rounded cursor-pointer bg-blue-400 font-bold text-white ">
+            Place Order
+          </button>
+        </Link>
+      )}
     </div>
   );
 };
 
-function CartCard({ item }) {
+function CartCard({ item, index }) {
+  const dispatch = useDispatch();
+  // dispatch()
+
   return (
     <div className="flex flex-col items-center justify-start  p-[10px] break-all w-30 cursor-pointer hover:shadow-lg gap-[5px] m-[10px] bg-pink-50">
       <img
@@ -38,6 +55,12 @@ function CartCard({ item }) {
       />
       <h2>{item?.name}</h2>
       <h3>Rs. {item?.price / 100}</h3>
+      <button
+        className="text-[70%] rounded bg-red-500 text-white p-1"
+        onClick={() => dispatch(removeItem(index))}
+      >
+        Remove <i class="fa-solid fa-trash"></i>
+      </button>
     </div>
   );
 }
